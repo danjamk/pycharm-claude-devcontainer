@@ -1,85 +1,90 @@
-# PyCharm + Claude Code DevContainer Template
-Vibe coding with tools like Claude Code can be enormously powerful - but with that power comes risks.
-AI tools do not always follow instructions exactly.  Sometimes due to poorly thought out prompts or user error.  But it 
-can also be due to AI bugs or poor implementation considerations. 
+# Secure AI Python Development with PyCharm DevContainer Template
 
-A good practice to balance the power with safety is to run AI tools like Claude Code in a containerized environment.  
-This provides isolation from your host system, ensuring that any mistakes or unexpected behavior do not impact your local files or environment.
-Along with other protections, you can feel more conformable leveraging this power.
+AI-assisted coding with tools like Claude Code can be enormously powerful - but with that power comes risks.
+AI development tools don't always follow instructions exactly, sometimes due to poorly thought out prompts, user error,
+or even AI bugs and implementation issues.
 
-This project is based specifically on the use if Jetbrains Pycharm (so focused on Python example) with Docker for dev containers and Claude Code 
-as the vibe coding AI assistant.  This approach can be adapted to other IDEs (VS Code pioneered dev containers and has great support for this).
-Other AI assistance can be used with other container solutions (Podman, Colima, Orbstack, etc.) as well.  And of course
-other programming languages can be used.
+A best practice for secure AI development is to run AI coding assistants like Claude Code in a containerized development environment.
+This provides complete isolation from your host system, ensuring that any mistakes or unexpected behavior during AI-assisted coding
+do not impact your local files or environment. Along with other protections, you can feel more comfortable leveraging this power.
 
-Containerizing your development environment is not enough thought.  This can help protect your host system, but it does not protect your code, data or remote systems.
-You should still follow best practices for security, including:
-- Setup read-only ssh keys for your git repositories and ensure you control commits outside the container
-- For cloud infrastructure, only allow access to development accounts where total destruction is acceptable.
-this applies to data and other services too.  Only allow write permissions tio assets that can be destroyed and recreated easily.
+This **production-ready PyCharm DevContainer template** is specifically designed for secure Python development with JetBrains PyCharm Professional,
+Docker dev containers, and Claude Code as your AI coding assistant. This approach can be adapted to other IDEs
+(VS Code pioneered dev containers and has excellent support), other AI assistants, and alternative container solutions
+(Podman, Colima, Orbstack, etc.), as well as other programming languages.
 
-With these basic guardrails in place, you can leverage the power of AI tools like Claude Code with much more confidence.
+**Important**: Containerizing your Python development environment protects your host system, but doesn't protect your code,
+data, or remote systems. Follow these additional security best practices:
+- Setup read-only SSH keys for git repositories and control commits outside the container
+- For cloud infrastructure, only allow access to development accounts where total destruction is acceptable
+- Only grant write permissions to assets that can be destroyed and recreated easily
 
-This project is a production-ready template for Python development using PyCharm Professional with DevContainers and integrated Claude Code AI assistance.
+With these guardrails in place, you can leverage AI-assisted Python development with much more confidence.
 
-## 🚀 What This Provides
+## 🎯 Production-Ready Python AI Development Template
 
-- **🐍 Python 3.12** containerized development environment
-- **🧠 Claude Code AI** assistant integrated and ready to use
-- **🛡️ Complete isolation** - no local Python/dependencies conflicts
-- **🔄 Reproducible setup** - works identically across all machines
-- **📦 Persistent storage** - configuration and cache preserved between sessions
-- **⚡ PyCharm Professional** full IDE integration with container backend
+This secure development environment template combines PyCharm Professional with DevContainers and integrated Claude Code
+for safe, reproducible AI-assisted Python development that works identically across all team members' machines.
+
+## 🚀 What This Secure AI Development Environment Provides
+
+- **🐍 Python 3.12** containerized development environment with complete dependency isolation
+- **🧠 Claude Code AI assistant** integrated and ready for secure AI-assisted coding
+- **🛡️ Complete host system protection** - no local Python/dependencies conflicts
+- **🔄 Reproducible team development** - identical environment across all machines
+- **📦 Persistent development storage** - configuration and cache preserved between sessions
+- **⚡ JetBrains PyCharm Professional** full IDE integration with secure container backend
+- **🔒 Secure AI coding practices** - isolated environment for safe AI development
 
 ## 📋 Prerequisites
 
-### Required Software
-- **PyCharm Professional** (Community Edition lacks DevContainer support)
-- **Docker Desktop** (running and allocated 8GB+ RAM)
-- **Anthropic Account** (for Claude Code - free tier available)
+### Required Software for AI Development Setup
+- **PyCharm Professional** (Community Edition lacks DevContainer support for this template)
+- **Docker Desktop** (running and allocated 8GB+ RAM for containerized development)
+- **Anthropic Account** (for Claude Code AI assistant - free tier available)
 
 ### System Requirements
 - **macOS/Windows/Linux** with Docker support
 - **8GB+ RAM** for Docker allocation
 - **10GB+ free disk space** for container images
 
-## 🏃‍♂️ Quick Start
+## 🏃‍♂️ Quick Start Guide for Secure AI Development
 
-### 1. Clone and Open
+### 1. Clone This Python DevContainer Template
 ```bash
 git clone https://github.com/your-username/pycharm-claude-devcontainer.git
 cd pycharm-claude-devcontainer
 ```
 
-### 2. Open in PyCharm
+### 2. Launch PyCharm Professional with DevContainer Support
 1. **Launch PyCharm Professional**
 2. **File → Open** → Select the project directory
-3. **PyCharm will detect** `.devcontainer/devcontainer.json`
-4. **Click "Reopen in Container"** when prompted
+3. **PyCharm will automatically detect** the `.devcontainer/devcontainer.json` configuration
+4. **Click "Reopen in Container"** when prompted for secure containerized development
 
 ### 3. First Build (5-10 minutes)
 - PyCharm builds the container automatically
 - Monitor progress in **Services** tool window
 - Container downloads Python 3.12, installs tools, and configures environment
 
-### 4. Setup Claude Code
-1. **Open terminal** in PyCharm (connected to container)
+### 4. Configure Claude Code AI Assistant
+1. **Open PyCharm terminal** (automatically connected to secure container)
 2. **Run:** `claude`
-3. **Choose "Use Subscription"** (recommended)
-4. **Authenticate** via browser with your Anthropic account
+3. **Choose "Use Subscription"** (recommended for team development)
+4. **Authenticate** via browser with your Anthropic account for AI-assisted coding
 
-### 5. Configure Python Interpreter
+### 5. Configure Python Development Environment
 1. **Right-click** `src/main.py` → **Run**
-2. **Configure interpreter** when prompted:
+2. **Configure Python interpreter** when prompted:
    - **Add Interpreter → System Interpreter**
    - **Path:** `/usr/local/bin/python3`
    - **Click OK**
 
-### 6. Start Developing!
-- **Run code:** Right-click → Run
-- **AI assistance:** Type `claude` in terminal
-- **Testing:** `python -m pytest tests/`
-- **Formatting:** `black src/ tests/`
+### 6. Start Secure AI-Assisted Development!
+- **Run Python code:** Right-click → Run
+- **AI coding assistance:** Type `claude` in terminal for intelligent code suggestions
+- **Automated testing:** `python -m pytest tests/`
+- **Code formatting:** `black src/ tests/`
 
 ## 🏗️ Project Structure
 
