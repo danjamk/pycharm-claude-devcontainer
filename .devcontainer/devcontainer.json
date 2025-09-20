@@ -1,0 +1,39 @@
+{
+  "name": "PyCharm Python Development with Claude Code",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "customizations": {
+    "jetbrains": {
+      "backend": "PyCharm"
+    }
+  },
+
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-claude-config,target=/home/developer/.claude,type=volume",
+    "source=${localWorkspaceFolderBasename}-bash-history,target=/commandhistory,type=volume",
+    "source=${localWorkspaceFolderBasename}-pip-cache,target=/home/developer/.cache/pip,type=volume"
+  ],
+
+  "remoteUser": "developer",
+  "workspaceFolder": "/workspace",
+
+  "forwardPorts": [8000, 5000, 3000, 8080],
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "bash .devcontainer/start.sh",
+
+  "remoteEnv": {
+    "PYTHONPATH": "/workspace/src",
+    "CLAUDE_CONFIG_DIR": "/home/developer/.claude",
+    "HISTFILE": "/commandhistory/.bash_history",
+    "PROMPT_COMMAND": "history -a"
+  },
+
+  "containerEnv": {
+    "DEVCONTAINER": "true"
+  },
+
+  "shutdownAction": "stopContainer"
+}
