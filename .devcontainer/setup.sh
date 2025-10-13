@@ -64,6 +64,35 @@ fi
 echo "📦 Installing Python dependencies..."
 pip install --no-cache-dir -r requirements.txt
 
+# Create .env.example if it doesn't exist
+echo "🔐 Setting up .env.example..."
+if [ ! -f ".env.example" ]; then
+    cat > .env.example << 'EOF'
+# .env.example - Environment Variables Template
+# Copy this file to .env and fill in your values
+# IMPORTANT: Never commit .env to git (it contains secrets)
+
+# ============================================================================
+# AWS Credentials (OPTIONAL)
+# ============================================================================
+# Only needed if your project uses AWS services
+# See .devcontainer/docs/AWS_SETUP.md for setup instructions
+#
+# AWS_ACCESS_KEY_ID=your-access-key-id-here
+# AWS_SECRET_ACCESS_KEY=your-secret-access-key-here
+# AWS_ACCOUNT_ID=123456789012
+# AWS_REGION=us-east-1
+
+# ============================================================================
+# Application-Specific Environment Variables
+# ============================================================================
+# Add your project's environment variables below
+EOF
+    echo "✅ Created .env.example"
+else
+    echo "ℹ️  .env.example already exists"
+fi
+
 # Create comprehensive .gitignore
 echo "🙈 Setting up .gitignore..."
 if [ ! -f ".gitignore" ]; then
@@ -615,7 +644,7 @@ echo "  ✅ Development utilities (scripts/dev-commands.sh)"
 echo ""
 echo "🚀 Next steps:"
 echo "  1. PyCharm should connect to this container automatically"
-echo "  2. Open PyCharm's integrated terminal"
+echo "  2. Open PyCharm's integrated terminal (with zsh)"
 echo "  3. Run 'claude' to start Claude Code"
 echo "  4. Start developing with AI assistance!"
 echo ""
@@ -624,3 +653,9 @@ echo "  - claude                    # Start Claude Code"
 echo "  - python src/main.py        # Run the application"
 echo "  - python -m pytest tests/  # Run tests"
 echo "  - ./scripts/dev-commands.sh check  # Run full code check"
+echo ""
+echo "📖 Optional Features (see .devcontainer/docs/):"
+echo "  - AWS Integration: See docs/AWS_SETUP.md"
+echo "  - GitHub SSH: See docs/GITHUB_SETUP.md"
+echo "  - PyCharm Terminal: See docs/PYCHARM_TERMINAL.md (for zsh config)"
+echo "  - macOS Security: See docs/MACOS_SECURITY.md"

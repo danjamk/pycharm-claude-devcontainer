@@ -1,7 +1,7 @@
-# PyCharm + Claude Code DevContainer Template
+# PyCharm + Claude Code Development Environment
 
 ## Project Overview
-This is a **reference template** for Python development using PyCharm Professional with DevContainers and Claude Code integration. This template provides a complete, reproducible development environment that can be shared across teams and used as a starting point for Python projects.
+This is a Python development project running in a PyCharm DevContainer with Claude Code integration. The environment provides complete isolation, reproducibility, and AI-powered development assistance.
 
 ## Development Environment Details
 
@@ -22,13 +22,14 @@ This is a **reference template** for Python development using PyCharm Profession
 │   └── start.sh          # Post-start script
 ├── src/                   # Python source code
 │   ├── __init__.py
-│   └── main.py           # Sample application (replace with your code)
+│   └── main.py           # Main application
 ├── tests/                 # Test files
 │   ├── __init__.py
-│   └── test_main.py      # Sample tests (expand for your project)
-├── requirements.txt       # Python dependencies (customize for your project)
-├── CLAUDE.md             # This file (AI context for your project)
-└── README.md             # Project documentation (update for your use case)
+│   └── test_main.py      # Test suite
+├── docs/                  # Documentation
+├── requirements.txt       # Python dependencies
+├── CLAUDE.md             # This file (AI context)
+└── README.md             # Project documentation
 ```
 
 ### Persistent Storage
@@ -95,57 +96,30 @@ claude --help                   # See Claude Code options
 - **Seamless Experience**: Debugging, running, testing all work normally
 - **Plugin Support**: PyCharm plugins can be installed in container environment
 
-## Template Usage
-
-### Getting Started with This Template
-1. **Fork or clone** this repository
-2. **Customize** the sample application in `src/main.py`
-3. **Update** `requirements.txt` with your project dependencies
-4. **Modify** `tests/test_main.py` with your test cases
-5. **Edit** this `CLAUDE.md` file with your project context
-
-### Template Features
-- **Sample Python Application**: Basic structure in `src/main.py`
-- **Unit Tests**: Example test suite in `tests/`
-- **Code Quality Tools**: Pre-configured black, flake8, mypy
-- **Development Scripts**: Utility commands in `scripts/dev-commands.sh`
-
-### Advanced Features (Coming Soon)
-- **GitHub Integration**: Read-only repository access for cloning dependencies
-- **AWS Credentials**: Secure development account access
-- **Additional Tools**: Database connections, API integrations
-
 ## Notes for Claude Code
 
-### When Working with This Template:
+### When Working with This Project:
 - **File Paths**: Use paths relative to `/workspace` (e.g., `src/main.py`, not `./src/main.py`)
 - **Python Imports**: The `src/` directory is in PYTHONPATH for clean imports
 - **Testing**: Always run tests after making changes: `python -m pytest tests/`
 - **Code Style**: Format code with `black` and check with `flake8`
 - **Git Operations**: Git is available and configured in the container
 
-### Development Best Practices:
-- **Replace sample code** with your actual application logic
-- **Expand test coverage** beyond the basic examples
-- **Update requirements.txt** as you add dependencies
+### Best Practices:
+- **Make small, testable changes** - each change should have corresponding tests
 - **Follow Python conventions** - use type hints, docstrings, and proper naming
+- **Test-driven development** - write tests for new functionality
 - **Security awareness** - remember we're in a containerized environment
 
 ### Available Tools:
 - **Python 3.12** with full standard library
-- **pytest** for testing and coverage
+- **pytest** for testing
 - **black** for code formatting
 - **flake8** for linting
 - **mypy** for type checking
 - **ipython** for interactive development
 - **git** for version control
-- **Standard Unix tools** (grep, find, curl, etc.)
-
-### Project Customization:
-- **Update** project name and description in README.md
-- **Modify** CLAUDE.md to reflect your specific project context
-- **Customize** DevContainer configuration for additional tools
-- **Configure** CI/CD integration for your repository
+- **All standard Unix tools** (grep, find, etc.)
 
 ## Troubleshooting
 
