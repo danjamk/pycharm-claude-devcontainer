@@ -121,6 +121,9 @@ celerybeat.pid
 
 # Environments
 .env
+*.env
+!.env.example
+.env.backup*
 .venv
 env/
 venv/
@@ -194,3 +197,19 @@ Temporary Items
 # Logs
 logs/
 *.log
+
+# My personal prefs
+TODO.md
+
+# Claude Code (don't commit Claude config)
+.claude/
+
+# SSH Keys (only commit public keys, never private keys)
+.devcontainer/ssh/id_*
+!.devcontainer/ssh/id_*.pub
+!.devcontainer/ssh/README.md
+
+# AWS credentials (never commit)
+.aws/
+# AWS permissions config (project-specific, not template)
+scripts/aws-permissions-config.sh

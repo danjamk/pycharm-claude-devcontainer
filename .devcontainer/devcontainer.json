@@ -12,7 +12,7 @@
 
   "mounts": [
     "source=${localWorkspaceFolderBasename}-claude-config,target=/home/developer/.claude,type=volume",
-    "source=${localWorkspaceFolderBasename}-bash-history,target=/commandhistory,type=volume",
+    "source=${localWorkspaceFolderBasename}-zsh-history,target=/commandhistory,type=volume",
     "source=${localWorkspaceFolderBasename}-pip-cache,target=/home/developer/.cache/pip,type=volume"
   ],
 
@@ -27,8 +27,8 @@
   "remoteEnv": {
     "PYTHONPATH": "/workspace/src",
     "CLAUDE_CONFIG_DIR": "/home/developer/.claude",
-    "HISTFILE": "/commandhistory/.bash_history",
-    "PROMPT_COMMAND": "history -a"
+    "HISTFILE": "/commandhistory/.zsh_history",
+    "SHELL": "/bin/zsh"
   },
 
   "containerEnv": {
