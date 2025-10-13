@@ -1,27 +1,33 @@
 # Secure AI Python Development with PyCharm DevContainer Template
 
 AI-assisted coding with tools like Claude Code can be enormously powerful - but with that power comes risks.
-AI development tools don't always follow instructions exactly, sometimes due to poorly thought out prompts, user error,
+AI development tools don't always follow instructions exactly, sometimes due to poorly thought-out prompts, user error,
 or even AI bugs and implementation issues.
 
-A best practice for secure AI development is to run AI coding assistants like Claude Code in a containerized development environment.
-This provides complete isolation from your host system, ensuring that any mistakes or unexpected behavior during AI-assisted coding
-do not impact your local files or environment. Along with other protections, you can feel more comfortable leveraging this power.
+The best practice for secure AI development is to run AI coding assistants like Claude Code in a containerized development environment.
+This provides elevated isolation from your host system, ensuring that any mistakes or unexpected behavior during AI-assisted coding
+has less of a chance to impact your local files or development environments. Along with other protections, you can feel more comfortable leveraging this power.
 
-This **production-ready PyCharm DevContainer template** is specifically designed for secure Python development with JetBrains PyCharm Professional,
+This **PyCharm DevContainer template** is specifically designed for secure Python development with JetBrains PyCharm Professional,
 Docker dev containers, and Claude Code as your AI coding assistant. This approach can be adapted to other IDEs
 (VS Code pioneered dev containers and has excellent support), other AI assistants, and alternative container solutions
 (Podman, Colima, Orbstack, etc.), as well as other programming languages.
 
 **Important**: Containerizing your Python development environment protects your host system, but doesn't protect your code,
-data, or remote systems. Follow these additional security best practices:
-- Setup read-only SSH keys for git repositories and control commits outside the container
-- For cloud infrastructure, only allow access to development accounts where total destruction is acceptable
-- Only grant write permissions to assets that can be destroyed and recreated easily
+data, or remote systems. This template implements additional security best practices:
 
-With these guardrails in place, you can leverage AI-assisted Python development with much more confidence.
+- **✅ Read-only SSH keys for git repositories** - Project-specific deploy keys prevent accidental force pushes
+  - See [.devcontainer/docs/GITHUB_SETUP.md](.devcontainer/docs/GITHUB_SETUP.md) for setup
+- **✅ Project-specific AWS credentials** - Isolated IAM users with minimal permissions prevent production access
+  - See [.devcontainer/docs/AWS_SETUP.md](.devcontainer/docs/AWS_SETUP.md) for setup
+  - Automated setup script: `./scripts/setup-aws-iam-user.sh`
+- **✅ No host credential mounts** - Your personal ~/.aws and ~/.ssh are never exposed to the container
+  - See [.devcontainer/docs/MACOS_SECURITY.md](.devcontainer/docs/MACOS_SECURITY.md) for Docker file sharing
 
-## 🎯 Production-Ready Python AI Development Template
+**All security features are optional** - the template works perfectly for vanilla Python development without AWS or GitHub SSH.
+Each feature gracefully degrades when not configured, with helpful status messages and setup guides.
+
+## 🎯 Secured Python AI Development Template
 
 This secure development environment template combines PyCharm Professional with DevContainers and integrated Claude Code
 for safe, reproducible AI-assisted Python development that works identically across all team members' machines.
@@ -35,6 +41,10 @@ for safe, reproducible AI-assisted Python development that works identically acr
 - **📦 Persistent development storage** - configuration and cache preserved between sessions
 - **⚡ JetBrains PyCharm Professional** full IDE integration with secure container backend
 - **🔒 Secure AI coding practices** - isolated environment for safe AI development
+- **🐚 Zsh with Oh My Zsh** - syntax highlighting, autosuggestions, and git-aware prompt
+- **☁️ Optional AWS integration** - project-specific IAM users with automated setup
+- **🔑 Optional GitHub SSH** - read-only deploy keys for secure git operations
+- **📚 Comprehensive documentation** - detailed guides for all features and setup
 
 ## 📋 Prerequisites
 
@@ -91,15 +101,28 @@ cd pycharm-claude-devcontainer
 ```
 ├── .devcontainer/              # DevContainer configuration
 │   ├── devcontainer.json      # Container settings
-│   ├── Dockerfile             # Python 3.12 + tools image
+│   ├── Dockerfile             # Python 3.12 + Zsh + AWS CLI
 │   ├── setup.sh              # Post-creation setup
-│   └── start.sh              # Container startup script
+│   ├── start.sh              # Smart AWS/GitHub detection
+│   ├── docs/                 # Comprehensive setup guides
+│   │   ├── AWS_SETUP.md      # AWS credential management
+│   │   ├── GITHUB_SETUP.md   # GitHub SSH configuration
+│   │   ├── MACOS_SECURITY.md # Docker file sharing security
+│   │   └── PYCHARM_TERMINAL.md # Zsh terminal setup
+│   └── ssh/                  # Project-specific SSH keys (optional)
+│       └── README.md         # SSH key instructions
+├── scripts/                   # Utility scripts
+│   ├── setup-aws-iam-user.sh # Automated AWS IAM user creation
+│   ├── cleanup-aws-iam-user.sh # AWS IAM user cleanup
+│   ├── aws-permissions-config.example.sh # Policy template
+│   └── README.md             # Scripts documentation
 ├── src/                       # Python source code
 │   ├── __init__.py
 │   └── main.py               # Sample application
 ├── tests/                     # Test files
 │   ├── __init__.py
 │   └── test_main.py          # Sample tests
+├── .env.example              # Environment variables template
 ├── requirements.txt           # Python dependencies
 ├── CLAUDE.md                 # AI assistant context
 └── README.md                 # This file
@@ -113,7 +136,7 @@ cd pycharm-claude-devcontainer
 3. **Use Claude Code** for AI assistance: `claude`
 4. **Run/debug/test** as usual - all happens in container
 
-### Common Commands (in container terminal)
+### Common Commands (in container terminal with Zsh)
 ```bash
 # Application
 python src/main.py                    # Run main application
@@ -121,15 +144,27 @@ python src/main.py                    # Run main application
 # Testing
 python -m pytest tests/              # Run all tests
 python -m pytest tests/ -v          # Verbose output
+python-test                          # Alias for pytest (with zsh)
 
 # Code Quality
 black src/ tests/                    # Format code
 flake8 src/ tests/                   # Lint code
 mypy src/                           # Type checking
+python-format                        # Alias for black (with zsh)
+python-lint                          # Alias for flake8 (with zsh)
+
+# AWS (if configured)
+aws-whoami                          # Show AWS identity
+aws-account                         # Show AWS account ID
 
 # Claude Code
 claude                              # Start AI assistant
 claude --help                      # Get help
+
+# Shell Features (Zsh + Oh My Zsh)
+# - Syntax highlighting (commands turn green/red as you type)
+# - Auto-suggestions (gray text from history - press → to accept)
+# - Git-aware prompt (shows branch and status)
 ```
 
 ### Container Management
@@ -142,8 +177,15 @@ claude --help                      # Get help
 ### Persistent Storage
 The container preserves between restarts:
 - **Claude Code configuration** (`/home/developer/.claude`)
-- **Bash command history** (`/commandhistory/.bash_history`)
+- **Zsh command history** (`/commandhistory/.zsh_history`)
 - **Python package cache** (`/home/developer/.cache/pip`)
+
+### Optional Features
+Configure these features based on your project needs:
+- **AWS Integration** - See [.devcontainer/docs/AWS_SETUP.md](.devcontainer/docs/AWS_SETUP.md)
+  - Automated setup: `./scripts/setup-aws-iam-user.sh`
+- **GitHub SSH Keys** - See [.devcontainer/docs/GITHUB_SETUP.md](.devcontainer/docs/GITHUB_SETUP.md)
+- **PyCharm Terminal (Zsh)** - See [.devcontainer/docs/PYCHARM_TERMINAL.md](.devcontainer/docs/PYCHARM_TERMINAL.md)
 
 ### Port Forwarding
 - **8000:** Development server
@@ -201,6 +243,43 @@ RUN apt-get update && apt-get install -y \
 - **Path:** Use `/usr/local/bin/python3`
 - **Recreate:** Add Interpreter → System Interpreter
 - **Verify:** Run `which python3` in container terminal
+
+## 🔐 Security Features
+
+This template implements multiple layers of security for safe AI-assisted development:
+
+### Container Isolation
+- **No host system access** - AI assistant can't accidentally modify your local files
+- **Separate user context** - Runs as non-root `developer` user
+- **Volume isolation** - Only project directory is mounted
+
+### Optional Credential Management
+All credential features are optional and gracefully degrade when not configured:
+
+#### AWS Credentials (Optional)
+- **Project-specific IAM users** with minimal permissions
+- **Automated setup** via `./scripts/setup-aws-iam-user.sh`
+- **No host ~/.aws mount** - credentials generated from .env file
+- **Policy templates** for common project types (data pipelines, web apps, ML)
+- See [.devcontainer/docs/AWS_SETUP.md](.devcontainer/docs/AWS_SETUP.md)
+
+#### GitHub SSH Keys (Optional)
+- **Read-only deploy keys** prevent accidental force pushes
+- **Project-specific keys** in .devcontainer/ssh/
+- **No host ~/.ssh mount** - personal SSH keys remain isolated
+- See [.devcontainer/docs/GITHUB_SETUP.md](.devcontainer/docs/GITHUB_SETUP.md)
+
+#### Docker File Sharing
+- **Restricted access** - only project directory shared
+- **No ~/.aws or ~/.ssh exposure** to containers
+- See [.devcontainer/docs/MACOS_SECURITY.md](.devcontainer/docs/MACOS_SECURITY.md)
+
+### What's Protected
+- ✅ Host system (container isolation)
+- ✅ Personal AWS credentials (not mounted)
+- ✅ Personal SSH keys (not mounted)
+- ✅ Production environments (project-specific IAM users)
+- ✅ Git history (read-only SSH keys)
 
 ## 📚 Additional Resources
 
