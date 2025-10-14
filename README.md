@@ -13,6 +13,9 @@ Docker dev containers, and Claude Code as your AI coding assistant. This approac
 (VS Code pioneered dev containers and has excellent support), other AI assistants, and alternative container solutions
 (Podman, Colima, Orbstack, etc.), as well as other programming languages.
 
+This project has a companion blog article you can find here: **[Containerized Development: My Security Layer for AI Coding Tools](https://medium.com/@dan.jam.kuhn/containerized-development-my-security-layer-for-ai-coding-tools-df48ac4af3e4)**
+
+
 **Important**: Containerizing your Python development environment protects your host system, but doesn't protect your code,
 data, or remote systems. This template implements additional security best practices:
 
