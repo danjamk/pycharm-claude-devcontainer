@@ -61,12 +61,85 @@ for safe, reproducible AI-assisted Python development that works identically acr
 - **8GB+ RAM** for Docker allocation
 - **10GB+ free disk space** for container images
 
+## 📦 Using This Template for Your Project
+
+If you want to create a **new independent project** from this template (not contribute to the template itself), choose one of these options:
+
+### Option 1: Clone and Re-initialize (Recommended)
+
+This creates a completely independent project with no connection to the original template:
+
+```bash
+# 1. Clone the template to your new project name
+git clone https://github.com/danjamk/pycharm-claude-devcontainer.git your-project-name
+cd your-project-name
+
+# 2. Remove the connection to the original repository
+rm -rf .git
+
+# 3. Initialize a fresh git repository
+git init
+git add .
+git commit -m "Initial commit: Created from pycharm-claude-devcontainer template"
+
+# 4. Create a new repository on GitHub (via web interface)
+# Go to https://github.com/new and create your repository
+# IMPORTANT: Do NOT initialize with README, .gitignore, or license (you already have these)
+
+# 5. Connect to your new GitHub repository (replace YOUR-USERNAME and YOUR-REPO-NAME)
+git remote add origin git@github.com:YOUR-USERNAME/YOUR-REPO-NAME.git
+git branch -M main
+git push -u origin main
+```
+
+### Option 2: GitHub "Use This Template" Button
+
+If the repository has enabled the template feature:
+
+1. Visit https://github.com/danjamk/pycharm-claude-devcontainer
+2. Click the green **"Use this template"** button (top right)
+3. Choose **"Create a new repository"**
+4. Name it (e.g., `your-project-name`)
+5. Clone your new repo: `git clone git@github.com:YOUR-USERNAME/your-project-name.git`
+
+This creates a brand new repository with no git history and no connection to the original.
+
+### Option 3: Download as ZIP
+
+Simplest manual approach:
+
+1. Visit https://github.com/danjamk/pycharm-claude-devcontainer
+2. Click **Code → Download ZIP**
+3. Extract to a folder with your project name
+4. Initialize git:
+   ```bash
+   cd your-project-name
+   git init
+   git add .
+   git commit -m "Initial commit: Created from pycharm-claude-devcontainer template"
+   ```
+5. Create repo on GitHub and connect as shown in Option 1, step 4-5
+
+### After Creating Your New Project
+
+Update these files with your project-specific information:
+
+- **README.md** - Replace with your project description
+- **CLAUDE.md** - Update with your project context for AI assistance
+- **.env.example** - Add any project-specific environment variables
+- **requirements.txt** - Update with your project dependencies
+
+Now proceed with the Quick Start guide below to set up your development environment.
+
+---
+
 ## 🏃‍♂️ Quick Start Guide for Secure AI Development
 
-### 1. Clone This Python DevContainer Template
+### 1. Open Your Project in PyCharm
 ```bash
-git clone https://github.com/your-username/pycharm-claude-devcontainer.git
-cd pycharm-claude-devcontainer
+# If you just created the project, you're already in the directory
+# Otherwise, navigate to it:
+cd your-project-name
 ```
 
 ### 2. Launch PyCharm Professional with DevContainer Support
