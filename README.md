@@ -42,7 +42,7 @@ for safe, reproducible AI-assisted Python development that works identically acr
 - **🛡️ Complete host system protection** - no local Python/dependencies conflicts
 - **🔄 Reproducible team development** - identical environment across all machines
 - **📦 Persistent development storage** - configuration and cache preserved between sessions
-- **⚡ JetBrains PyCharm Professional** full IDE integration with secure container backend
+- **⚡ Dual IDE support** - PyCharm Professional or VS Code (your choice!)
 - **🔒 Secure AI coding practices** - isolated environment for safe AI development
 - **🐚 Zsh with Oh My Zsh** - syntax highlighting, autosuggestions, and git-aware prompt
 - **☁️ Optional AWS integration** - project-specific IAM users with automated setup
@@ -52,7 +52,17 @@ for safe, reproducible AI-assisted Python development that works identically acr
 ## 📋 Prerequisites
 
 ### Required Software for AI Development Setup
-- **PyCharm Professional** (Community Edition lacks DevContainer support for this template)
+
+**Choose Your IDE** (you only need one):
+- **PyCharm Professional** (Community Edition lacks DevContainer support)
+  - Paid (free for students/open source projects)
+  - Best for Python specialists
+- **Visual Studio Code** (free)
+  - Free and open source
+  - Best for polyglot developers
+  - Requires "Dev Containers" extension
+
+**Required for Both:**
 - **Docker Desktop** (running and allocated 8GB+ RAM for containerized development)
 - **Anthropic Account** (for Claude Code AI assistant - free tier available)
 
@@ -133,9 +143,95 @@ Now proceed with the Quick Start guide below to set up your development environm
 
 ---
 
+## 🤝 DevContainer is Optional for Contributors
+
+**Important**: When you use this template for your project, contributors can choose whether to use the DevContainer or develop locally. The DevContainer provides consistency and convenience, but is **not required**.
+
+### For Project Maintainers
+
+When contributors join your project, they have two options:
+
+#### Option A: Use the DevContainer (Recommended for Consistency)
+- ✅ Automatic environment setup with all dependencies
+- ✅ Guaranteed identical environment across all team members
+- ✅ No "works on my machine" issues
+- ✅ Requires Docker + PyCharm Professional or VS Code
+
+#### Option B: Local Development (Standard Python)
+Contributors can work normally without Docker:
+
+```bash
+# 1. Clone your repository
+git clone git@github.com:your-username/your-project.git
+cd your-project
+
+# 2. Create a Python virtual environment
+python3 -m venv venv
+source venv/bin/activate  # or `venv\Scripts\activate` on Windows
+
+# 3. Install dependencies from requirements.txt
+pip install -r requirements.txt
+
+# 4. Set PYTHONPATH for clean imports (optional but recommended)
+export PYTHONPATH="${PYTHONPATH}:$(pwd)/src"  # Add to .bashrc/.zshrc
+
+# 5. Develop normally
+python src/main.py
+python -m pytest tests/
+```
+
+### What Contributors Need Without DevContainer
+- **Python 3.12+** (or compatible version specified in your project)
+- **pip** for package management
+- **Dependencies** from `requirements.txt`
+- **Environment variables** from `.env.example` (if applicable)
+- Their own preferred IDE/editor
+
+### Recommended: Update Your Project README
+
+When you customize this template for your project, add a section like this to your README:
+
+```markdown
+## Development Setup
+
+### Option A: DevContainer (Recommended)
+Provides automatic setup with all dependencies and tools configured.
+
+**Requirements**: Docker Desktop + PyCharm Professional (or VS Code)
+
+1. Open project in PyCharm
+2. Click "Reopen in Container" when prompted
+3. Wait for container to build (first time only)
+4. Start developing!
+
+### Option B: Local Development
+Standard Python development without Docker.
+
+**Requirements**: Python 3.12+
+
+1. Clone the repository
+2. Create virtual environment: `python3 -m venv venv`
+3. Activate: `source venv/bin/activate`
+4. Install dependencies: `pip install -r requirements.txt`
+5. Set PYTHONPATH: `export PYTHONPATH="${PYTHONPATH}:$(pwd)/src"`
+6. Run tests to verify: `python -m pytest tests/`
+
+Both approaches work perfectly - choose what fits your workflow!
+```
+
+### The Bottom Line
+
+The DevContainer is a **convenience tool** that ensures consistency, not a requirement. Your project's Python code works with or without it - contributors choose what works best for them.
+
+---
+
 ## 🏃‍♂️ Quick Start Guide for Secure AI Development
 
-### 1. Open Your Project in PyCharm
+**Choose your IDE:** This template works with both PyCharm Professional and VS Code. Follow the guide for your preferred IDE.
+
+### Quick Start with PyCharm Professional
+
+#### 1. Open Your Project in PyCharm
 ```bash
 # If you just created the project, you're already in the directory
 # Otherwise, navigate to it:
@@ -166,17 +262,77 @@ cd your-project-name
    - **Path:** `/usr/local/bin/python3`
    - **Click OK**
 
-### 6. Start Secure AI-Assisted Development!
+#### 6. Start Secure AI-Assisted Development!
 - **Run Python code:** Right-click → Run
 - **AI coding assistance:** Type `claude` in terminal for intelligent code suggestions
 - **Automated testing:** `python -m pytest tests/`
 - **Code formatting:** `black src/ tests/`
 
+---
+
+### Quick Start with Visual Studio Code
+
+#### 1. Install Dev Containers Extension
+1. Open VS Code
+2. Click Extensions icon (sidebar) or press `Cmd+Shift+X` (macOS) / `Ctrl+Shift+X` (Windows/Linux)
+3. Search for "Dev Containers" by Microsoft
+4. Click **Install**
+
+Or install from command line:
+```bash
+code --install-extension ms-vscode-remote.remote-containers
+```
+
+#### 2. Open Project in Container
+```bash
+# Navigate to your project
+cd your-project-name
+
+# Open in VS Code
+code .
+```
+
+When VS Code opens:
+1. A notification appears: "Folder contains a Dev Container configuration file"
+2. Click **Reopen in Container**
+
+Or use Command Palette: `Cmd+Shift+P` / `Ctrl+Shift+P` → **Dev Containers: Reopen in Container**
+
+#### 3. First Build (5-10 minutes)
+- VS Code builds the container automatically
+- Progress shown in bottom-right corner
+- Click "show log" to see detailed build progress
+- Python extensions are automatically installed
+
+#### 4. Configure Claude Code AI Assistant
+Once the container is ready:
+1. Open integrated terminal: Press `` Ctrl+` `` (backtick)
+2. Terminal is automatically connected to container with Zsh
+3. Run: `claude`
+4. Choose **"Use Subscription"** (recommended)
+5. Authenticate via browser with your Anthropic account
+
+#### 5. Verify Python Setup
+The Python interpreter is automatically configured:
+- Check bottom-right status bar: should show `Python 3.12.x`
+- If needed, click and select `/usr/local/bin/python3`
+
+#### 6. Start Secure AI-Assisted Development!
+- **Run Python:** Right-click file → Run Python → Run Python File in Terminal
+- **Run tests:** Click testing flask icon (sidebar) or run `python -m pytest tests/`
+- **Debug:** Set breakpoints and press `F5`
+- **Claude Code:** Type `claude` in terminal for AI assistance
+- **Format:** Right-click → Format Document (uses Black automatically)
+
+**For detailed VS Code setup, see [.devcontainer/docs/VSCODE_SETUP.md](.devcontainer/docs/VSCODE_SETUP.md)**
+
+---
+
 ## 🏗️ Project Structure
 
 ```
 ├── .devcontainer/              # DevContainer configuration
-│   ├── devcontainer.json      # Container settings
+│   ├── devcontainer.json      # Container settings (PyCharm + VS Code)
 │   ├── Dockerfile             # Python 3.12 + Zsh + AWS CLI
 │   ├── setup.sh              # Post-creation setup
 │   ├── start.sh              # Smart AWS/GitHub detection
@@ -184,7 +340,8 @@ cd your-project-name
 │   │   ├── AWS_SETUP.md      # AWS credential management
 │   │   ├── GITHUB_SETUP.md   # GitHub SSH configuration
 │   │   ├── MACOS_SECURITY.md # Docker file sharing security
-│   │   └── PYCHARM_TERMINAL.md # Zsh terminal setup
+│   │   ├── PYCHARM_TERMINAL.md # Zsh terminal setup
+│   │   └── VSCODE_SETUP.md   # VS Code complete setup guide
 │   └── ssh/                  # Project-specific SSH keys (optional)
 │       └── README.md         # SSH key instructions
 ├── scripts/                   # Utility scripts
@@ -262,6 +419,7 @@ Configure these features based on your project needs:
   - Automated setup: `./scripts/setup-aws-iam-user.sh`
 - **GitHub SSH Keys** - See [.devcontainer/docs/GITHUB_SETUP.md](.devcontainer/docs/GITHUB_SETUP.md)
 - **PyCharm Terminal (Zsh)** - See [.devcontainer/docs/PYCHARM_TERMINAL.md](.devcontainer/docs/PYCHARM_TERMINAL.md)
+- **VS Code Setup** - See [.devcontainer/docs/VSCODE_SETUP.md](.devcontainer/docs/VSCODE_SETUP.md)
 
 ### Port Forwarding
 - **8000:** Development server
@@ -359,10 +517,15 @@ All credential features are optional and gracefully degrade when not configured:
 
 ## 📚 Additional Resources
 
-- **[DevContainers Documentation](https://containers.dev/)**
-- **[PyCharm DevContainer Guide](https://www.jetbrains.com/help/pycharm/connect-to-devcontainer.html)**
-- **[Claude Code Documentation](https://docs.anthropic.com/claude/docs)**
-- **[Docker Best Practices](https://docs.docker.com/develop/best-practices/)**
+### DevContainer & IDE Documentation
+- **[DevContainers Specification](https://containers.dev/)** - Official DevContainer standard
+- **[PyCharm DevContainer Guide](https://www.jetbrains.com/help/pycharm/connect-to-devcontainer.html)** - JetBrains official docs
+- **[VS Code DevContainers](https://code.visualstudio.com/docs/devcontainers/containers)** - Microsoft official docs
+- **[VS Code Python Tutorial](https://code.visualstudio.com/docs/python/python-tutorial)** - Python in VS Code
+
+### Tools & Best Practices
+- **[Claude Code Documentation](https://docs.anthropic.com/claude/docs)** - AI assistant docs
+- **[Docker Best Practices](https://docs.docker.com/develop/best-practices/)** - Container optimization
 
 ## 📄 License
 
